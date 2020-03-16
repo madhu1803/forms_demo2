@@ -9,9 +9,7 @@ from datetime import date
 app = Flask(__name__)
 import copy
 
-mydb = mysql.connector.connect(
-    host="localhost", database="madhu_db1", user="root",
-)
+mydb = mysql.connector.connect(host="localhost", database="madhu_db1", user="root",)
 mycursor = mydb.cursor(buffered=True)
 
 
@@ -28,7 +26,8 @@ def form():
     # fetching top 3 reasons
     # mycursor.execute(f"select id from complaints_table order by no_of_complaints DESC limit 3;")
     # records = mycursor.fetchall()
-    records = []
+    # NOTE: records table not found
+    records = [1, 2, 3]
 
     # coping dict
     data1 = copy.deepcopy(form1.data)
@@ -178,12 +177,8 @@ def form():
         return "error"
 
     return render_template(
-        "form.html", form1=form1, form2=form2, form3=form3, records=records
+        "main.html", form1=form1, form2=form2, form3=form3, records=records
     )
-
-@app.route("/test")
-def test_route():
-    return render_template("main.html")
 
 
 if __name__ == "__main__":
